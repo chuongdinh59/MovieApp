@@ -1,0 +1,31 @@
+.card {
+  position: relative;
+  &-item {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  &-title {
+    padding: 5px;
+    background-color: rgb(39 40 46);
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: all;
+  }
+  &-section {
+    gap: 0 10px;
+    @include tablet {
+      justify-content: unset;
+      gap: 15px;
+      .card-title {
+        font-size: 12px;
+      }
+    }
+  }
+  &-list {
+    gap: 15px;
+  }
+}

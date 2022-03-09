@@ -1,0 +1,93 @@
+@import './mixin';
+@import './variable';
+@import './reset';
+@import './base';
+@import './slider';
+@import './button';
+@import './menu';
+@import './search';
+@import './card';
+@import './header';
+@import './filter';
+@import './detail';
+@import './similar';
+@import './history';
+.home {
+  display: flex;
+  &-main {
+    flex: 4;
+    height: 100vh;
+    overflow-y: auto;
+    @include customscroll(4px, unset, rgb(31 41 55));
+    &_list {
+      flex: 3;
+      padding: 30px;
+    }
+    &_topSearch {
+      flex: 1;
+    }
+    &_header-sm {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      .logo {
+        width: 30%;
+      }
+    }
+  }
+}
+$numbers: (0, 1, 2, 3, 4, 5, 6, 7, 8);
+
+@each $val in $numbers {
+  .grid-col-#{$val} {
+    grid-template-columns: repeat($val, 1fr);
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-md-#{$val} {
+    @include tablet {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-sm-#{$val} {
+    @include mobile {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+.grid {
+  display: grid;
+}
+.overplay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 1;
+  @include mobile {
+    display: block;
+  }
+}
+.home-main_header-sm {
+  display: none;
+  @include mobile {
+    display: block;
+  }
+}
+.pointer {
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

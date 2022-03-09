@@ -1,0 +1,23 @@
+.similar {
+  &-label {
+    padding: 10px 0;
+  }
+  &-item,
+  &-value {
+    display: flex;
+    gap: 0 10px;
+    img {
+      width: 25%;
+    }
+  }
+  &-main {
+    height: 420px;
+    overflow: auto;
+    @include customscroll(5px, unset, rgb(31 41 55));
+  }
+  @include tablet {
+    img {
+      width: 15%;
+    }
+  }
+}

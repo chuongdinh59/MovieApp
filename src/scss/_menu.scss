@@ -1,0 +1,60 @@
+.menu {
+  max-width: 300px;
+  border-right: 1px solid rgb(31 41 55);
+  height: 100vh;
+  //   position: fixed;
+  left: 0;
+  &-search {
+    display: none;
+  }
+  &-wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  &-logo {
+    width: 60%;
+  }
+  &-content {
+    &_item {
+      display: flex;
+      align-items: center;
+      gap: 0 20px;
+    }
+  }
+  @include tablet {
+    .title-2,
+    .title {
+      display: none;
+    }
+    max-width: 10%;
+    &-content {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &-logo {
+      width: 100%;
+    }
+  }
+  @include mobile {
+    position: fixed;
+    max-width: 65%;
+    background-color: rgb(25 26 31);
+    border: none;
+    z-index: 100;
+    .title-2,
+    .title {
+      display: block;
+    }
+    &-content {
+      display: block;
+    }
+    &-logo {
+      width: 60%;
+    }
+    &-search {
+      display: flex;
+    }
+  }
+}
