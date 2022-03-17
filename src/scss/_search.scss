@@ -3,6 +3,7 @@
   padding: 30px 30px 10px;
   height: 100vh;
   overflow: auto;
+  position: relative;
   @include customscroll(5px, unset, rgb(31 41 55));
   @include tablet {
     width: 280px;
@@ -21,6 +22,7 @@
     justify-content: space-between;
     border: 1px solid rgb(75 85 99);
     border-radius: 10px;
+
     // @include tablet {
     //   padding: 5px;
     //   font-size: 10px;
@@ -59,6 +61,46 @@
     gap: 20px 0;
     img {
       border-radius: 5px;
+    }
+  }
+  .list {
+    position: absolute;
+    top: calc(10% + 10px);
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 0 10px;
+      img {
+        width: 30%;
+      }
+    }
+  }
+}
+.header {
+  .list {
+    position: absolute;
+    top: calc(60% + 10px);
+    padding: 20px 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 0 10px;
+      img {
+        width: 30%;
+      }
     }
   }
 }

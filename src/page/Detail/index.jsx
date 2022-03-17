@@ -1,64 +1,70 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
-import { fetchDetail, setDataMovieDetail } from '../../redux/reducers/movieSlice';
+import Video from '../../components/Video';
+import api from '../../service/api';
+import { axiosConfig } from '../../service/axios';
+import Credit from './Credit';
 import Similar from './Similar';
-
 const Detail = () => {
-  const { id } = useParams();
-
-  const dispatch = useDispatch();
-
+  const { category, id } = useParams();
+  const [data, setData] = useState();
   useEffect(() => {
-    dispatch(fetchDetail(id));
-  }, []);
+    (async () => {
+      const res = await api.detail(category, id, { params: {} });
+      setData(res);
+    })();
+    window.scroll(0, 0);
+  }, [category, id]);
   return (
     <div className="detail">
       <div className="container">
         <Header />
-        <div className="detail-main grid">
+        <div className="detail-main grid mb-3">
           <div className="col ">
-            <div className="media mb-2"></div>
-            <div className="title">West Side Story</div>
+            <div className="media mb-2">
+              <Video category={category} id={id} />
+            </div>
+            <div className="title">{data?.title}</div>
             <div className="evalute mb-3">
               <div className="evalute-item">
                 <div className="icon star">
                   <FaStar />
                 </div>
-                <span className="title-2">7.8</span>
+                <span className="title-2">
+                  {data?.vote_average}+ ({data?.vote_count} )
+                </span>
               </div>
               <div className="evalute-item">
                 <div className="icon">
-                  <img src="./img/calendar.png" alt="" />
+                  <img src="/img/calendar.png" alt="" />
                 </div>
                 <span className="title-2">2022</span>
               </div>
             </div>
             <div className="tags mb-3">
-              <a href="#!" className="tag-item text">
-                Crime
-              </a>
-              <a href="#!" className="tag-item text">
-                Drama
-              </a>
-              <a href="#!" className="tag-item text">
-                Singing & Dacing
-              </a>
-              <a href="#!" className="tag-item text">
-                Romatic
-              </a>
+              {data?.genres.map((item) => {
+                return (
+                  <a key={item?.id} href="#!" className="tag-item text">
+                    {item?.name}
+                  </a>
+                );
+              })}
             </div>
-            <p className="description text">
-              An adaptation of the 1957 musical, West Side Story explores forbidden love and the rivalry
-              between the Jets and the Sharks, two teenage street gangs of different ethnic backgrounds.
-            </p>
           </div>
           <div className="col">
-            <Similar />
+            <Similar category={category} id={id} />
           </div>
         </div>
+        <div className="overview mb-3">
+          <img src={axiosConfig.w500Image(data?.poster_path || data?.backdrop_path)} alt="" />
+          <div className="overview-se">
+            <p className="description text">{data?.overview}</p>
+          </div>
+        </div>
+        <h3 className="title mb-3">CAST</h3>
+        <Credit category={category} id={id} />
       </div>
     </div>
   );

@@ -7,7 +7,10 @@
     display: flex;
     gap: 0 10px;
     img {
-      width: 25%;
+      width: 28%;
+      height: 55px;
+      object-fit: cover;
+      object-position: center;
     }
   }
   &-main {

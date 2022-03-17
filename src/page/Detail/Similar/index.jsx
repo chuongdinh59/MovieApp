@@ -1,101 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import api from '../../../service/api';
+import { axiosConfig } from '../../../service/axios';
 
-const Similar = () => {
+const Similar = (props) => {
+  const [data, setData] = useState();
+  const { category, id } = props;
+  useEffect(() => {
+    (async () => {
+      const res = await api.similar(category, id);
+      setData(res.results);
+    })();
+  }, [category, id]);
+
   return (
     <div className="similar">
       <h3 className="similar-label title">Similar to this</h3>
       <div className="similar-main">
-        <div className="similar-item mb-2">
-          <img
-            src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.netpop.app%2Fcover%2F20211123%2F1637646582687_960f6ed5a1d87c8a6ed0029a413c541d%E7%AB%96%E7%89%88.jpg&w=&h=100&fit=outside"
-            alt=""
-          />
-          <div className="similar-content">
-            <span className="title-2">Diana</span>
-            <div className="similar-value">
-              <div className="icon star">
-                <FaStar />
+        {data?.map((item, i) => {
+          return (
+            <Link className="similar-item mb-2" key={i} to={`/detail/${category}/${item?.id}`}>
+              <img src={axiosConfig.w500Image(item?.backdrop_path || item?.poster_path)} alt="" />
+              <div className="similar-content">
+                <p className="title-2">{item.title || item.name}</p>
+                <div className="similar-value">
+                  <div className="icon star">
+                    <FaStar />
+                  </div>
+                  <span className="title-2">{item.vote_average}</span>
+                </div>
               </div>
-              <span className="title-2">4.6</span>
-            </div>
-          </div>
-        </div>
-        <div className="similar-item mb-2">
-          <img
-            src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.netpop.app%2Fcover%2F20211123%2F1637646582687_960f6ed5a1d87c8a6ed0029a413c541d%E7%AB%96%E7%89%88.jpg&w=&h=100&fit=outside"
-            alt=""
-          />
-          <div className="similar-content">
-            <span className="title-2">Diana</span>
-            <div className="similar-value">
-              <div className="icon star">
-                <FaStar />
-              </div>
-              <span className="title-2">4.6</span>
-            </div>
-          </div>
-        </div>
-        <div className="similar-item mb-2">
-          <img
-            src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.netpop.app%2Fcover%2F20211123%2F1637646582687_960f6ed5a1d87c8a6ed0029a413c541d%E7%AB%96%E7%89%88.jpg&w=&h=100&fit=outside"
-            alt=""
-          />
-          <div className="similar-content">
-            <span className="title-2">Diana</span>
-            <div className="similar-value">
-              <div className="icon star">
-                <FaStar />
-              </div>
-              <span className="title-2">4.6</span>
-            </div>
-          </div>
-        </div>
-        <div className="similar-item mb-2">
-          <img
-            src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.netpop.app%2Fcover%2F20211123%2F1637646582687_960f6ed5a1d87c8a6ed0029a413c541d%E7%AB%96%E7%89%88.jpg&w=&h=100&fit=outside"
-            alt=""
-          />
-          <div className="similar-content">
-            <span className="title-2">Diana</span>
-            <div className="similar-value">
-              <div className="icon star">
-                <FaStar />
-              </div>
-              <span className="title-2">4.6</span>
-            </div>
-          </div>
-        </div>
-        <div className="similar-item mb-2">
-          <img
-            src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.netpop.app%2Fcover%2F20211123%2F1637646582687_960f6ed5a1d87c8a6ed0029a413c541d%E7%AB%96%E7%89%88.jpg&w=&h=100&fit=outside"
-            alt=""
-          />
-          <div className="similar-content">
-            <span className="title-2">Diana</span>
-            <div className="similar-value">
-              <div className="icon star">
-                <FaStar />
-              </div>
-              <span className="title-2">4.6</span>
-            </div>
-          </div>
-        </div>
-        <div className="similar-item mb-2">
-          <img
-            src="https://images.weserv.nl/?url=https%3A%2F%2Fimg.netpop.app%2Fcover%2F20211123%2F1637646582687_960f6ed5a1d87c8a6ed0029a413c541d%E7%AB%96%E7%89%88.jpg&w=&h=100&fit=outside"
-            alt=""
-          />
-          <div className="similar-content">
-            <span className="title-2">Diana</span>
-            <div className="similar-value">
-              <div className="icon star">
-                <FaStar />
-              </div>
-              <span className="title-2">4.6</span>
-            </div>
-          </div>
-        </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

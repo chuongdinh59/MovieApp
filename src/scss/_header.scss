@@ -1,4 +1,5 @@
 .header {
+  position: relative;
   &-container {
     display: flex;
     justify-content: space-between;
@@ -15,7 +16,7 @@
   &-item {
     position: relative;
     &::before {
-      content: "";
+      content: '';
       width: 0%;
       position: absolute;
       left: 50%;
@@ -26,6 +27,9 @@
       transition: 0.5s ease-in-out;
     }
     &:hover::before {
+      width: 100%;
+    }
+    &.active::before {
       width: 100%;
     }
   }

@@ -1,26 +1,10 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 import { CardSection } from '../../../components/Card';
 import Slider from '../../../components/Slide';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { homeService } from '../../../service/homeService';
-import useSWRInfinite from 'swr/infinite';
+import { category, movieType, tvType } from '../../../service/api';
 
-const HomePageMain = () => {
-  const data = useSelector((state) => state.home)?.home;
-  // const getKey = (index) => `home-${index || 0}`;
-  // const {
-  //   data: dataTemp,
-  //   error,
-  //   setSize,
-  // } = useSWRInfinite(getKey, (key) => homeService.getHome(Number(key.split('-').slice(-1)[0])), {
-  //   revalidateFirstPage: false,
-  // });
-  // console.log(setSize);
-  const logger = () => {
-    console.log(10);
-  };
+const HomePageMain = (props) => {
   return (
     <div className="home-main">
       <div className="home-main_header-sm">
@@ -31,21 +15,15 @@ const HomePageMain = () => {
           <FaBars />
         </div>
       </div>
-      <InfiniteScroll dataLength={20} next={logger}>
-        <div className="home-main_list">
-          <Slider />
-          {/* <CardSection />
-        <CardSection />
-        <CardSection />
-        <CardSection />
-        <CardSection />
-        <CardSection /> */}
-          {data &&
-            data?.map((item) => {
-              return item.homeSectionName !== '' && <CardSection data={item} />;
-            })}
-        </div>
-      </InfiniteScroll>
+      <div className="home-main_list">
+        <Slider />
+        <CardSection category={category.movie} type={movieType.popular} />
+        <CardSection category={category.movie} type={movieType.top_rated} />
+        <CardSection category={category.movie} type={movieType.upcoming} />
+        <CardSection category={category.tv} type={tvType.popular} />
+        <CardSection category={category.tv} type={tvType.on_the_air} />
+        <CardSection category={category.tv} type={tvType.top_rated} />
+      </div>
     </div>
   );
 };

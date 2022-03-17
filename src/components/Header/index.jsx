@@ -2,13 +2,15 @@ import React from 'react';
 import Filter from '../Filter';
 import { Search } from '../Search';
 import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = (props) => {
+  const { setType, type } = props;
   return (
     <header className="header">
       <div className="header-container  ">
         <div className="header-logo">
-          <img src="./img/logo.png" alt="" />
+          <img src="/img/logo.png" alt="" />
         </div>
         <div className="icon search-icon">
           <FaSearch />
@@ -18,15 +20,26 @@ const Header = () => {
         </div>
       </div>
       <div className="header-category mb-3">
-        <a href="#!" className="header-item title">
+        <Link
+          className={`header-item title pointer${type === 'tv' ? ' active' : ''}`}
+          onClick={(e) => {
+            setType('tv');
+          }}
+          to={`/explore`}
+        >
           TV Series
-        </a>
-        <a href="#!" className="header-item title">
+        </Link>
+        <Link
+          className={`header-item title pointer ${type === 'movie' ? ' active' : ''}`}
+          onClick={(e) => {
+            const target = e.currentTarget.classList;
+            if (target.contains('active')) target.remove('active');
+            setType('movie');
+          }}
+          to={`/explore/movie`}
+        >
           Movie
-        </a>
-        <a href="#!" className="header-item title">
-          Anime
-        </a>
+        </Link>
       </div>
       <div className="header-filter mb-3">
         <Filter />

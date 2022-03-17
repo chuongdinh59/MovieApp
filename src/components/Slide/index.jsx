@@ -1,13 +1,22 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, { useEffect, useState } from 'react';
 // Import Swiper styles
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useSelector } from 'react-redux';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import api, { movieType } from '../../service/api';
+import { axiosConfig } from '../../service/axios';
+import { Link } from 'react-router-dom';
 const Slider = () => {
-  let slider = useSelector((store) => store.home);
-  slider = slider?.home?.filter((item) => item.homeSectionType === 'BANNER')[1].recommendContentVOList;
+  const [slider, setSlider] = useState();
+  useEffect(() => {
+    const params = { page: 1 };
+    (async () => {
+      const res = await api.getMoviesList(movieType.popular, { params });
+      setSlider(res.results);
+    })();
+  }, []);
+
   return (
     <Swiper
       modules={[Navigation]}
@@ -18,18 +27,19 @@ const Slider = () => {
       loop
       className="mySwiper"
     >
-      {slider?.map((item) => {
-        return (
-          <SwiperSlide>
-            <section className="slider">
-              <div className="slider-item">
-                <span className="title">{item.title}</span>
-                <img src={item.imageUrl} alt="" />
-              </div>
-            </section>
-          </SwiperSlide>
-        );
-      })}
+      {!!slider &&
+        slider?.map((item, i) => {
+          return (
+            <SwiperSlide key={i}>
+              <section className="slider">
+                <Link className="slider-item" to={`/detail/movie/${item.id}`}>
+                  <span className="title">{item.title || item.name}</span>
+                  <img src={axiosConfig.w500Image(item?.backdrop_path || item?.poster_path)} alt="" />
+                </Link>
+              </section>
+            </SwiperSlide>
+          );
+        })}
     </Swiper>
   );
 };

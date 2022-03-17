@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaDesktop, FaHistory, FaHome, FaRegCompass, FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Menu = () => {
   return (
@@ -10,30 +11,30 @@ const Menu = () => {
         </div>
         <div className="menu-content">
           <h3 className="menu-title title mb-3">Menu</h3>
-          <div className="menu-content_item mb-2">
+          <Link className="menu-content_item mb-2" to={'/'}>
             <div className="icon">
               <FaHome />
             </div>
             <span className="title-2">Home</span>
-          </div>
-          <div className="menu-content_item mb-2">
+          </Link>
+          <Link className="menu-content_item mb-2" to="/discovery">
             <div className="icon">
               <FaRegCompass />
             </div>
             <span className="title-2">Discovery</span>
-          </div>
-          <div className="menu-content_item mb-2">
+          </Link>
+          <Link className="menu-content_item mb-2" to="explore">
             <div className="icon">
               <FaDesktop />
             </div>
             <span className="title-2">Explore</span>
-          </div>
-          <div className="menu-content_item mb-2">
+          </Link>
+          <Link className="menu-content_item mb-2" to="/history">
             <div className="icon">
               <FaHistory />
             </div>
             <span className="title-2">History</span>
-          </div>
+          </Link>
           <div className="menu-content_item mb-2 menu-search">
             <div className="icon">
               <FaSearch />
