@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { CardSection } from '../../../components/Card';
 import Slider from '../../../components/Slide';
+import MenuContext from '../../../context/menuContext';
 import { category, movieType, tvType } from '../../../service/api';
 
-const HomePageMain = (props) => {
+const HomePageMain = () => {
+  const { handleToggle } = useContext(MenuContext);
   return (
     <div className="home-main">
-      <div className="home-main_header-sm">
+      <div className="home-main_header-sm" onClick={() => handleToggle(true)}>
         <div className="logo">
           <img src="./img/logo.png" alt="" />
         </div>

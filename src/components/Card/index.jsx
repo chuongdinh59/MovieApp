@@ -1,27 +1,31 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { Link, useParams } from 'react-router-dom';
 // Import Swiper styles
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Link, useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import api, { category, movieType, tvType } from '../../service/api';
 import { axiosConfig } from '../../service/axios';
 import { addType } from '../Search';
-import InfiniteScroll from 'react-infinite-scroll-component';
-
+import Loading from '../Loading';
 export const Card = ({ data, category: cate }) => {
   const link = '/detail/' + category[cate] + '/' + data.id;
   const bg = axiosConfig.w500Image(data.poster_path || data.backdrop_path);
   const handleClick = (props) => {
     let items = JSON.parse(localStorage.getItem('history')) || [];
+    const index = items.findIndex((i) => i.data.id === data.id);
+    console.log(index);
+    if (index !== -1) {
+      items.splice(index, 1);
+    }
     items = [
-      ...items,
       {
-        link,
-        bg,
-        title: data?.title,
+        data,
+        cate,
       },
+      ...items,
     ];
     localStorage.setItem('history', JSON.stringify(items));
   };
@@ -58,7 +62,7 @@ export const CardSection = (props) => {
     fetchData();
   }, []);
 
-  return (
+  return data.length > 0 ? (
     <section className="card mb-3">
       <div className=" title mb-2">{props.category.toUpperCase() + ' - ' + format(props.type)}</div>
       {/* <div className="card-section grid grid-col-4 grid-col-md-2"> */}
@@ -66,6 +70,7 @@ export const CardSection = (props) => {
         <Card />
         <Card />  
         <Card /> */}
+
       <Swiper
         modules={[Navigation]}
         navigation={true}
@@ -76,12 +81,12 @@ export const CardSection = (props) => {
         breakpoints={{
           640: {
             width: 640,
-            slidesPerView: 1,
+            slidesPerView: 2,
           },
           // when window width is >= 768px
           768: {
             width: 768,
-            slidesPerView: 2,
+            slidesPerView: 4,
           },
         }}
       >
@@ -95,6 +100,8 @@ export const CardSection = (props) => {
       </Swiper>
       {/* </div> */}
     </section>
+  ) : (
+    <Loading />
   );
 };
 
@@ -140,6 +147,7 @@ export const CardList = () => {
     }
     setData([...data, ...res.results]);
   };
+  console.log(data.length > 0);
   // console.log(data);
   // const fetchMoreData = () => {
   //   const id = setTimeout(() => {
@@ -157,7 +165,7 @@ export const CardList = () => {
   //   }, 1000);
   //   return clearTimeout(id);
   // };
-  return (
+  return data.length > 0 ? (
     <InfiniteScroll dataLength={data.length} next={fetchMoreData} hasMore={true} loader={<h4>Loading...</h4>}>
       <section className="card-list grid grid-col-5 grid-col-md-3 grid-col-sm-2 ">
         {data?.map((i) => (
@@ -165,5 +173,7 @@ export const CardList = () => {
         ))}
       </section>
     </InfiniteScroll>
+  ) : (
+    <Loading />
   );
 };

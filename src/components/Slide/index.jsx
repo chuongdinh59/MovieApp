@@ -33,7 +33,7 @@ const Slider = () => {
             <SwiperSlide key={i}>
               <section className="slider">
                 <Link className="slider-item" to={`/detail/movie/${item.id}`}>
-                  <span className="title">{item.title || item.name}</span>
+                  <span className="title">{item?.title || item?.name}</span>
                   <img src={axiosConfig.w500Image(item?.backdrop_path || item?.poster_path)} alt="" />
                 </Link>
               </section>

@@ -7,6 +7,7 @@ import api from '../../service/api';
 import { axiosConfig } from '../../service/axios';
 import Credit from './Credit';
 import Similar from './Similar';
+import Loading from '../../components/Loading';
 const Detail = () => {
   const { category, id } = useParams();
   const [data, setData] = useState();
@@ -17,7 +18,7 @@ const Detail = () => {
     })();
     window.scroll(0, 0);
   }, [category, id]);
-  return (
+  return data ? (
     <div className="detail">
       <div className="container">
         <Header />
@@ -67,6 +68,8 @@ const Detail = () => {
         <Credit category={category} id={id} />
       </div>
     </div>
+  ) : (
+    <Loading />
   );
 };
 

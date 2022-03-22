@@ -15,7 +15,6 @@ export const Search = () => {
   const [value, setValue] = useState(null);
   const [data, setData] = useState();
   const ref = useRef(null);
-
   useEffect(() => {
     if (ref.current) {
       clearTimeout(ref.current);

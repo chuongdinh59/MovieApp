@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { Card } from '../../components/Card';
 import Header from '../../components/Header';
 
 const History = () => {
@@ -9,6 +10,7 @@ const History = () => {
     localStorage.removeItem('history');
     setData([]);
   };
+
   return (
     <>
       <div className="history">
@@ -24,14 +26,7 @@ const History = () => {
             </div>
             <div className="grid grid-col-5 gap-15">
               {data?.map((i) => {
-                return (
-                  <Link className="card-item" to={i.link}>
-                    <div className="card-img">
-                      <img src={i.bg} alt="" />
-                      <p className="card-title text">{i?.title}</p>
-                    </div>
-                  </Link>
-                );
+                return <Card data={i?.data} category={i?.cate} />;
               })}
             </div>
           </div>

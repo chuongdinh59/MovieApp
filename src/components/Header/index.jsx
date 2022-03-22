@@ -9,9 +9,9 @@ const Header = (props) => {
   return (
     <header className="header">
       <div className="header-container  ">
-        <div className="header-logo">
+        <Link className="header-logo" to={'/'}>
           <img src="/img/logo.png" alt="" />
-        </div>
+        </Link>
         <div className="icon search-icon">
           <FaSearch />
         </div>

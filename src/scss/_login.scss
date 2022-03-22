@@ -1,0 +1,25 @@
+.login {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  padding: 10px;
+  width: 350px;
+  border-radius: 10px;
+  &-label {
+    color: #000;
+    font-size: 20px;
+  }
+  svg,
+  img {
+    width: 100px;
+    height: 100px;
+  }
+}
+.center {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

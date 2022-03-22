@@ -13,6 +13,9 @@
 @import './similar';
 @import './history';
 @import './credit';
+@import './skeleton';
+@import './modal';
+@import './login';
 .home {
   display: flex;
   &-main {
@@ -72,7 +75,7 @@ $numbers: (0, 1, 2, 3, 4, 5, 6, 7, 8);
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
-  z-index: 1;
+  z-index: 10;
   @include mobile {
     display: block;
   }
@@ -80,7 +83,7 @@ $numbers: (0, 1, 2, 3, 4, 5, 6, 7, 8);
 .home-main_header-sm {
   display: none;
   @include mobile {
-    display: block;
+    display: flex;
   }
 }
 .pointer {

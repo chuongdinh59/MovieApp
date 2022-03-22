@@ -3,10 +3,9 @@
   border-right: 1px solid rgb(31 41 55);
   height: 100vh;
   //   position: fixed;
+  position: relative;
   left: 0;
-  &-search {
-    display: none;
-  }
+  z-index: 100;
   &-wrapper {
     max-width: 80%;
     margin: 0 auto;
@@ -14,11 +13,26 @@
   &-logo {
     width: 60%;
   }
+  &-search {
+    display: none !important;
+  }
   &-content {
     &_item {
       display: flex;
       align-items: center;
       gap: 0 20px;
+    }
+  }
+  &-user {
+    position: absolute;
+    padding: 0 20px;
+    bottom: 5%;
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    width: 100%;
+    .icon {
+      width: 50px;
     }
   }
   @include tablet {
@@ -43,6 +57,11 @@
     background-color: rgb(25 26 31);
     border: none;
     z-index: 100;
+    transform: translateX(-100%);
+    transition: 0.3s ease-in-out;
+    &.visible {
+      transform: translateX(0);
+    }
     .title-2,
     .title {
       display: block;
@@ -54,7 +73,7 @@
       width: 60%;
     }
     &-search {
-      display: flex;
+      display: flex !important;
     }
   }
 }
