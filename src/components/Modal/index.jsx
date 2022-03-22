@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { FaTimes } from 'react-icons/fa';
+// import { FaTimes } from 'react-icons/fa';
 import ModalContext from '../../context/modalContext';
 function Modal({ children }) {
   const { handleToggleModal, isOpen } = useContext(ModalContext);
@@ -12,7 +12,7 @@ function Modal({ children }) {
       <div className="modal-overplay" onClick={handleToggleModal}></div>
       <div className="modal-main">
         <div className="modal-close" onClick={handleToggleModal}>
-          <FaTimes />
+          {/* <FaTimes /> */}
         </div>
         <div className="modal-content">{children}</div>
       </div>
