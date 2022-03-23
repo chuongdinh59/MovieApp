@@ -3,11 +3,13 @@ import { FaDesktop, FaHistory, FaHome, FaUser, FaRegCompass, FaSearch } from 're
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import MenuContext from '../../context/menuContext';
+import ModalContext from '../../context/modalContext';
 import { auth } from '../../firebase/config';
 
 const Menu = () => {
   const { isOpen, handleToggle } = useContext(MenuContext);
   const { user, setUser } = useContext(AuthContext);
+  const { handleToggleModal } = useContext(ModalContext);
   const handleFblogout = () => {
     auth
       .signOut()
@@ -19,7 +21,6 @@ const Menu = () => {
       });
     setUser({});
   };
-  console.log(user);
   return (
     <>
       {isOpen && <div className="overplay" onClick={handleToggle}></div>}
@@ -48,7 +49,13 @@ const Menu = () => {
               </div>
               <span className="title-2">History</span>
             </Link>
-            <div className="menu-content_item mb-2 menu-search pointer" onClick={handleToggle}>
+            <div
+              className="menu-content_item mb-2 menu-search pointer"
+              onClick={() => {
+                handleToggle();
+                handleToggleModal();
+              }}
+            >
               <div className="icon">
                 <FaSearch />
               </div>

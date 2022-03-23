@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { FaTimes } from 'react-icons/fa';
-import ModalContext from '../../context/modalContext';
-function Modal({ children }) {
-  const { handleToggleModal, isOpen } = useContext(ModalContext);
+function Modal({ isOpen, handleToggleModal, children }) {
   if (typeof document === undefined) {
     return <div className="modal"></div>;
   }

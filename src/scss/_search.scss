@@ -65,7 +65,7 @@
   }
   .list {
     position: absolute;
-    top: calc(10% + 10px);
+    // top: calc(10% + 10px);
     padding: 20px 10px;
     background-color: rgba(0, 0, 0, 0.9);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -89,7 +89,6 @@
 .header {
   .list {
     position: absolute;
-    top: calc(40% + 10px);
     padding: 20px 10px;
     background-color: rgba(0, 0, 0, 0.9);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
