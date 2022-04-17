@@ -12,7 +12,7 @@ export function addType(array, type) {
   }
 }
 export const Search = () => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('');
   const [data, setData] = useState();
   const ref = useRef(null);
   useEffect(() => {
@@ -89,9 +89,9 @@ export const SearchBoard = () => {
           <img className="mb-2" src="{}" alt="" />
           <span className="text">asdasd</span>;
         </div> */}
-        {data?.map((item) => {
+        {data?.map((item, id) => {
           return (
-            <Link className="search-top_item" to={`/detail/${item?.media_type}/${item?.id}`}>
+            <Link className="search-top_item" to={`/detail/${item?.media_type}/${item?.id}`} key={id}>
               <img
                 className="mb-2"
                 src={axiosConfig.w500Image(item.backdrop_path || item.poster_path)}

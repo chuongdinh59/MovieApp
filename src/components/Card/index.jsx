@@ -16,7 +16,6 @@ export const Card = ({ data, category: cate }) => {
   const handleClick = (props) => {
     let items = JSON.parse(localStorage.getItem('history')) || [];
     const index = items.findIndex((i) => i.data.id === data.id);
-    console.log(index);
     if (index !== -1) {
       items.splice(index, 1);
     }
@@ -147,7 +146,6 @@ export const CardList = () => {
     }
     setData([...data, ...res.results]);
   };
-  console.log(data.length > 0);
   // console.log(data);
   // const fetchMoreData = () => {
   //   const id = setTimeout(() => {

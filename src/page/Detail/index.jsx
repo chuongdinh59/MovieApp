@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -8,14 +8,21 @@ import { axiosConfig } from '../../service/axios';
 import Credit from './Credit';
 import Similar from './Similar';
 import Loading from '../../components/Loading';
+import Comment from '../../components/Comment';
+import { AppContext } from '../../context/appContext';
 const Detail = () => {
   const { category, id } = useParams();
   const [data, setData] = useState();
+  const { setFilter } = useContext(AppContext);
   useEffect(() => {
     (async () => {
       const res = await api.detail(category, id, { params: {} });
       setData(res);
     })();
+    setFilter({
+      category,
+      id,
+    });
     window.scroll(0, 0);
   }, [category, id]);
   return data ? (
@@ -58,12 +65,14 @@ const Detail = () => {
             <Similar category={category} id={id} />
           </div>
         </div>
-        <div className="overview mb-3">
+        {/* <div className="overview mb-3">
           <img src={axiosConfig.w500Image(data?.poster_path || data?.backdrop_path)} alt="" />
           <div className="overview-se">
             <p className="description text">{data?.overview}</p>
           </div>
-        </div>
+        </div> */}
+        <h3 className="title mb-3">Comments</h3>
+        <Comment />
         <h3 className="title mb-3">CAST</h3>
         <Credit category={category} id={id} />
       </div>

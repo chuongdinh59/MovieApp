@@ -9,7 +9,7 @@ import { axiosConfig } from '../../service/axios';
 import { addType } from '../Search';
 function SearchModal(props) {
   const { handleToggleModal, isOpen } = useContext(ModalContext);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState('');
   const [data, setData] = useState();
   const ref = useRef(null);
   useEffect(() => {
@@ -49,7 +49,7 @@ function SearchModal(props) {
             ref={ref}
           />
         </div>
-        {data.length > 0 && (
+        {data && data?.length > 0 && (
           <div className="list-search">
             <Swiper
               modules={[Navigation]}

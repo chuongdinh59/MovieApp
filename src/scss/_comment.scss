@@ -1,0 +1,62 @@
+.comment {
+  &-item {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+    margin-top: 20px;
+    img {
+      border-radius: 50%;
+      width: 40px;
+    }
+  }
+  &-profile {
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+  }
+  &-text {
+    flex: 1;
+  }
+
+  &-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    width: 100%;
+    input {
+      color: #fff;
+      padding: 5px 0;
+      background-color: transparent;
+      border-bottom: 1px solid #fff;
+      flex: 1;
+      &:focus::placeholder {
+        color: transparent;
+      }
+      &::placeholder {
+        color: #e4e6eb;
+      }
+    }
+  }
+  &-notify {
+    display: flex;
+    align-items: center;
+  }
+  svg {
+    width: 24px;
+    transition: 0.2s;
+  }
+  svg:hover {
+    fill: #1877f2;
+  }
+  @include tablet {
+    &-text {
+      font-size: 12px;
+    }
+    span {
+      font-size: 14px;
+    }
+    &-item {
+      gap: 0 5px;
+    }
+  }
+}

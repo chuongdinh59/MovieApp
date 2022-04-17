@@ -2,18 +2,34 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/authContext';
 
 import firebase, { auth } from '../../firebase/config';
-
+import addDocument from '../../utils/addDocument';
 const fbProvider = new firebase.auth.FacebookAuthProvider();
 const ggProvider = new firebase.auth.GoogleAuthProvider();
 function Login(props) {
-  const handleFbLogin = () => {
-    auth.signInWithPopup(fbProvider);
+  const handleFbLogin = async () => {
+    const { additionalUserInfo, user } = await auth.signInWithPopup(fbProvider);
+    if (additionalUserInfo?.isNewUser) {
+      addDocument('users', {
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid,
+        providerId: additionalUserInfo.providerId,
+      });
+    }
   };
-  const handleGGLogin = () => {
-    auth.signInWithPopup(ggProvider);
+  const handleGGLogin = async () => {
+    const { additionalUserInfo, user } = await auth.signInWithPopup(ggProvider);
+    if (additionalUserInfo?.isNewUser) {
+      addDocument('users', {
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid,
+        providerId: additionalUserInfo.providerId,
+      });
+    }
   };
-  const { loading } = useContext(AuthContext);
-  console.log(loading);
   return (
     <div className="center">
       <div className="login pointer" onClick={handleFbLogin}>

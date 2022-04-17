@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
           photoURL,
         });
         setLoading(false);
-        navigate('/');
+        navigate(-1);
       }
     });
     return () => {

@@ -18,8 +18,8 @@ function Video({ category, id }) {
     ></iframe>
   ) : (
     <div className="wrapper">
-      <div class="loadingio-spinner-rolling-afwpmg7czlt">
-        <div class="ldio-bse6wyl5wgh">
+      <div className="loadingio-spinner-rolling-afwpmg7czlt">
+        <div className="ldio-bse6wyl5wgh">
           <div></div>
         </div>
       </div>
