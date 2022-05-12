@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import { Card } from '../../components/Card';
 import Header from '../../components/Header';
 
@@ -25,8 +24,9 @@ const History = () => {
               </button>
             </div>
             <div className="grid grid-col-5 gap-15">
-              {data?.map((i) => {
-                return <Card data={i?.data} category={i?.cate} />;
+              {data?.map((i, idx) => {
+                console.log(i);
+                return <Card key={idx} data={i?.data} category={i?.cate} />;
               })}
             </div>
           </div>

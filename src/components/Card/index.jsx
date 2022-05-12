@@ -22,7 +22,7 @@ export const Card = ({ data, category: cate }) => {
     items = [
       {
         data,
-        cate,
+        cate: category[cate],
       },
       ...items,
     ];
